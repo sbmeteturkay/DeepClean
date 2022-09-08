@@ -1,8 +1,10 @@
 using DG.Tweening;
 using UnityEngine;
-
+using System;
 public class CollisionDetect : MonoBehaviour
 {
+    public static event Action GameFinish;
+    [SerializeField] GameObject chipsParent;
     [SerializeField] Transform[] objectPath;
     [SerializeField] Transform collectParent;
     Vector3[] wayPoints;
@@ -22,7 +24,12 @@ public class CollisionDetect : MonoBehaviour
             other.tag = "Untagged";
             other.transform.DOLocalPath(wayPoints,1f);
             other.transform.DOScale(0, 2);
-            this.Wait(1f, () => other.gameObject.SetActive(false));
+            this.Wait(1f, () => {
+                other.gameObject.SetActive(false);
+                print(chipsParent.transform.childCount);
+                if (chipsParent.transform.childCount == 0)
+                    GameFinish?.Invoke();
+                });
         }
     }
 }

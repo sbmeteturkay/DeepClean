@@ -12,7 +12,10 @@ public class ObjectMove : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButton(0)) { MoveTarget(); }
+        if (Input.GetMouseButton(0)) { 
+            MoveTarget(); 
+        }
+
     }
     private void MoveTarget() {
         Vector3 vector3 = Cast();
