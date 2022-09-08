@@ -28,7 +28,11 @@ public class CollisionDetect : MonoBehaviour
                 other.gameObject.SetActive(false);
                 print(chipsParent.transform.childCount);
                 if (chipsParent.transform.childCount == 0)
+                {
                     GameFinish?.Invoke();
+                    gameObject.SetActive(false);
+                }
+
                 });
         }
     }
